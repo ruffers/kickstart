@@ -1,0 +1,13 @@
+{
+    "name": "kickstart",
+    "version": "0.1.0",
+    "description": "",
+    "author": "Nick Ma",
+    "ruff": {
+        "dependencies": {
+            "ruff-mbd-v1": "*",
+            "button-gpio": "^1.0.0",
+            "lcd1602-pcf8574-hd44780": "^0.1.1"
+        }
+    }
+}
