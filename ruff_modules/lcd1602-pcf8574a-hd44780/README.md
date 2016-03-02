@@ -7,7 +7,7 @@ This is the driver for LCD module e.g.
 
 ## Support Devices
 
-[lcd1602-pcf8574-hd44780](http://rap.ruff.io/devices/lcd1602-pcf8574-hd44780)
+[lcd1602-pcf8574a-hd44780](http://rap.ruff.io/devices/lcd1602-pcf8574a-hd44780)
 
 ## Usage
 The following program will show on LCD screen

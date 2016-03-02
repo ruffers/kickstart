@@ -1,5 +1,5 @@
 {
-    "models": ["lcd1602-pcf8574-hd44780"],
+    "models": ["lcd1602-pcf8574a-hd44780"],
     "export": "hd44780",
     "inputs": {
         "i2c": "pcf8574/i2c",
@@ -13,7 +13,7 @@
             "driver": "pcf8574",
             "power": {
                 "name": "vdd",
-                "voltage": "5v"
+                "voltage": "3.3v"
             },
             "outputs": {
                 "gpio0": {
@@ -45,7 +45,7 @@
                 "i2c": {
                     "type": "i2c",
                     "args": {
-                        "address": 39
+                        "address": 63
                     }
                 }
             }

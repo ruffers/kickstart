@@ -1,6 +1,6 @@
 {
-    "name": "lcd1602-pcf8574-hd44780",
-    "version": "0.1.1",
+    "name": "lcd1602-pcf8574a-hd44780",
+    "version": "0.1.4",
     "ruff": {
         "dependencies": {
             "hd44780": "0.1.2",

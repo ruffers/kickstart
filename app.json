@@ -17,8 +17,8 @@
         },
         {
             "id": "lcd",
-            "model": "lcd1602-pcf8574-hd44780",
-            "driver": "lcd1602-pcf8574-hd44780",
+            "model": "lcd1602-pcf8574a-hd44780",
+            "driver": "lcd1602-pcf8574a-hd44780",
             "export": "lcd:hd44780",
             "inputs": {
                 "i2c": "lcd:pcf8574/i2c",
@@ -32,7 +32,7 @@
                     "driver": "pcf8574",
                     "power": {
                         "name": "vdd",
-                        "voltage": "5v"
+                        "voltage": "3.3v"
                     },
                     "outputs": {
                         "gpio0": {
@@ -64,7 +64,7 @@
                         "i2c": {
                             "type": "i2c",
                             "args": {
-                                "address": 39
+                                "address": 63
                             }
                         }
                     }
@@ -133,6 +133,55 @@
                     }
                 }
             ]
+        },
+        {
+            "id": "led",
+            "model": "KY-016",
+            "driver": "ky-016",
+            "inputs": {
+                "pwm-r": {
+                    "type": "pwm",
+                    "args": {
+                        "frequency": 490
+                    }
+                },
+                "pwm-g": {
+                    "type": "pwm",
+                    "args": {
+                        "frequency": 490
+                    }
+                },
+                "pwm-b": {
+                    "type": "pwm",
+                    "args": {
+                        "frequency": 490
+                    }
+                }
+            }
+        },
+        {
+            "id": "flame",
+            "model": "FLAME-01",
+            "driver": "flame-gpio",
+            "inputs": {
+                "gpio": {
+                    "type": "gpio",
+                    "args": {
+                        "direction": "in",
+                        "edge": "both"
+                    }
+                }
+            }
+        },
+        {
+            "id": "infrared",
+            "model": "HC-SR501",
+            "driver": "hc-sr501",
+            "inputs": {
+                "gpio": {
+                    "type": "gpio"
+                }
+            }
         }
     ]
 }

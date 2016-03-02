@@ -189,6 +189,7 @@ module.exports = driver({
          */
         turnOn : function() {
             this._turnOn(true);
+            return this;
         },
 
         /*

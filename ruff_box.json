@@ -56,6 +56,42 @@
             }
         },
         {
+            "id": "gpio-12",
+            "model": "ruff-gpio",
+            "driver": "sys-gpio",
+            "inputs": {
+                "pin": {
+                    "type": "number",
+                    "args": {
+                        "pin": 12
+                    }
+                }
+            },
+            "outputs": {
+                "gpio": {
+                    "type": "gpio"
+                }
+            }
+        },
+        {
+            "id": "gpio-13",
+            "model": "ruff-gpio",
+            "driver": "sys-gpio",
+            "inputs": {
+                "pin": {
+                    "type": "number",
+                    "args": {
+                        "pin": 13
+                    }
+                }
+            },
+            "outputs": {
+                "gpio": {
+                    "type": "gpio"
+                }
+            }
+        },
+        {
             "id": "gpio-17",
             "model": "ruff-gpio",
             "driver": "sys-gpio",
@@ -146,6 +182,46 @@
             }
         },
         {
+            "id": "ruff-pwm",
+            "model": "ruff-pwm",
+            "driver": "pca9685",
+            "inputs": {
+                "i2c": {
+                    "type": "i2c",
+                    "args": {
+                        "address": 85
+                    },
+                    "bind": "i2c-0/i2c"
+                }
+            },
+            "outputs": {
+                "pwm-0": {
+                    "type": "pwm"
+                },
+                "pwm-1": {
+                    "type": "pwm"
+                },
+                "pwm-2": {
+                    "type": "pwm"
+                },
+                "pwm-3": {
+                    "type": "pwm"
+                },
+                "pwm-4": {
+                    "type": "pwm"
+                },
+                "pwm-5": {
+                    "type": "pwm"
+                },
+                "pwm-6": {
+                    "type": "pwm"
+                },
+                "pwm-7": {
+                    "type": "pwm"
+                }
+            }
+        },
+        {
             "id": "led-r",
             "model": "ruff-led-gpio",
             "driver": "led-gpio",
@@ -227,7 +303,7 @@
             "driver": "pcf8574",
             "power": {
                 "name": "vdd",
-                "voltage": "5v"
+                "voltage": "3.3v"
             },
             "outputs": {
                 "gpio0": {
@@ -259,7 +335,7 @@
                 "i2c": {
                     "type": "i2c",
                     "args": {
-                        "address": 39
+                        "address": 63
                     },
                     "bind": "i2c-0/i2c"
                 }
@@ -328,6 +404,60 @@
                 }
             },
             "alias": "lcd"
+        },
+        {
+            "id": "flame",
+            "model": "FLAME-01",
+            "driver": "flame-gpio",
+            "inputs": {
+                "gpio": {
+                    "type": "gpio",
+                    "args": {
+                        "direction": "in",
+                        "edge": "both"
+                    },
+                    "bind": "gpio-12/gpio"
+                }
+            }
+        },
+        {
+            "id": "infrared",
+            "model": "HC-SR501",
+            "driver": "hc-sr501",
+            "inputs": {
+                "gpio": {
+                    "type": "gpio",
+                    "bind": "gpio-13/gpio"
+                }
+            }
+        },
+        {
+            "id": "led",
+            "model": "KY-016",
+            "driver": "ky-016",
+            "inputs": {
+                "pwm-r": {
+                    "type": "pwm",
+                    "args": {
+                        "frequency": 490
+                    },
+                    "bind": "ruff-pwm/pwm-0"
+                },
+                "pwm-g": {
+                    "type": "pwm",
+                    "args": {
+                        "frequency": 490
+                    },
+                    "bind": "ruff-pwm/pwm-1"
+                },
+                "pwm-b": {
+                    "type": "pwm",
+                    "args": {
+                        "frequency": 490
+                    },
+                    "bind": "ruff-pwm/pwm-2"
+                }
+            }
         }
     ]
 }
