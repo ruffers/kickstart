@@ -1,15 +1,22 @@
 'use strict';
-
+// var os = require('os');
+// console.log(os);
 var intv;
+var server = require('./server');
+var config = require('./config');
 
 $.ready(function(error) {
     if (error) {
         console.log(error);
         return;
     }
+
+    // start server
+    server.listen(config.port);
+
     $('lcd').turnOn();
     $('lcd').cursorOff();
-
+    $('lcd').print(getIPAdress());
     // 大按钮
     // 效果：按下时，板载的LED交替发光。抬起时，板载LED熄灭。
     var flag = false;
@@ -17,17 +24,19 @@ $.ready(function(error) {
     $('button')
         .on('push', function() {
             intv = setInterval(function() {
-                    if (flag) {
-                        $('led-r').turnOff();
-                        $('led-b').turnOn();
-                        console.log('blue on');
-                    } else {
-                        $('led-r').turnOn();
-                        $('led-b').turnOff();
-                        console.log('red on')
-                    }
-                    flag = !flag;
-                }, 500)
+                if (flag) {
+                    $('led-r').turnOff();
+                    $('led-b').turnOn();
+                    console.log('blue on');
+                } else {
+                    $('led-r').turnOn();
+                    $('led-b').turnOff();
+                    console.log('red on')
+                }
+                flag = !flag;
+            }, 500)
+
+            $("lcd").print('I love u')
                 // $('led').turnOn();
                 // console.log($('led').isOn());
         })
@@ -38,6 +47,7 @@ $.ready(function(error) {
             $('led-b').turnOff();
             // $('led').turnOff();
             // console.log($('led').isOn());
+            $('lcd').clear();
         });
     // 测试LED和LCD
     // 取消下面注释。效果：每秒随机更换颜色，并且在LCD屏幕上显示出当前的RGB数值。
@@ -62,6 +72,9 @@ $.ready(function(error) {
     });
     $('flame').on('flameout', function() {
         console.log('in flame flameout');
+    });
+    $('flame').on('none', function() {
+        console.log('火灭了');
     });
     // setInterval(function() {
     //     if ($('flame').isBurning()) {
@@ -90,3 +103,18 @@ $.end(function() {
     // $('led-g').turnOff();
     $('led-b').turnOff();
 });
+
+function getIPAdress() {
+    var interfaces = require('os').networkInterfaces();
+    // console.log(interfaces);
+    // return 'ip'
+    for (var devName in interfaces) {
+        var iface = interfaces[devName];
+        for (var i = 0; i < iface.length; i++) {
+            var alias = iface[i];
+            if (alias.family === 'INET' && alias.ip !== '127.0.0.1' && !alias.internal) {
+                return alias.ip;
+            }
+        }
+    }
+}
